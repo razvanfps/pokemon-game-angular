@@ -20,7 +20,7 @@ export class GameComponent implements OnInit {
   get score(): number {
     return this.playerService.score;
   }
-  
+
   get hearts(): Array<any> {
     return Array(this.playerService.lifes);
   }
@@ -43,13 +43,25 @@ export class GameComponent implements OnInit {
   }
 
   get pokemonName(): string {
-    return this._selected? this._pokemon.name : 'undefined';
+    return this._selected ? this._pokemon.name : 'undefined';
   }
+
+  // Nueva propiedad para el cambio dinámico del tamaño de la imagen
+  get imageDimensions(): { width: number; height: number } {
+    return {
+      width: this.isHovered ? 100 : 275,
+      height: this.isHovered ? 100 : 200
+    };
+  }
+
+
+  isHovered: boolean = false;
 
   constructor(
     private playerService: PlayerService,
     private pokemonService: PokemonService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.playerService.resetGame();
@@ -68,7 +80,7 @@ export class GameComponent implements OnInit {
       this.playerService.decreaseLifes();
       console.log('incorrect');
     }
-    
+
   }
 
   // this function es execute every time that user click in next game
@@ -88,5 +100,14 @@ export class GameComponent implements OnInit {
       this.loaded = true;
     }
   }
+
+// ex 1 per  a poder fer que la imatge al passar es
+  onMouseOver() {
+    this.isHovered = true;
+  }
+  onMouseOut() {
+    this.isHovered = false;
+  }
+
 
 }
