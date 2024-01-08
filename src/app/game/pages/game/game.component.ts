@@ -54,7 +54,7 @@ export class GameComponent implements OnInit {
     };
   }
 
-
+  // amb aixo el que faig es veure si el ratoli pasa sobre la imatge
   isHovered: boolean = false;
 
   constructor(
